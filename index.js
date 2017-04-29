@@ -1,4 +1,14 @@
 window.addEventListener("load", function() {
+  //add storage
+  if(JSON.parse(localStorage.getItem("topscore")) === null){
+    var highScore = [0];
+  } else {
+    var highScore = JSON.parse(localStorage.getItem("topscore"));
+    hScore = document.querySelector('#high-score');
+    hScore.innerText = highScore[0];
+  }
+
+
 
   var canvas = document.getElementById("shapes-game"),
       height = canvas.scrollHeight,
@@ -16,7 +26,7 @@ window.addEventListener("load", function() {
       dropId;
   canvas.width = width;
   canvas.height = height;
-  ctx.font = "30px Arial";
+  ctx.font = "20px Arial";
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
   ctx.fillText("Press the space bar to start a new game!", canvas.width/2, canvas.height/2); 
@@ -116,7 +126,14 @@ window.addEventListener("load", function() {
   // when the game ends display this
   function drawGameStartText(ctx, width, height, score) {
     clear(ctx, canvas.width, canvas.height);
-    ctx.font = "30px Arial";
+    //increase high score if higher.
+    if(score > highScore[0]){
+      let high = document.querySelector('#high-score');
+      high.innerText = score;
+      highScore[0] = score;
+      localStorage.setItem("topscore", JSON.stringify(highScore));
+    }
+    ctx.font = "20px Arial";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
     ctx.fillText("Game over! your score is: " + score, canvas.width/2, canvas.height/2 - 50);
@@ -146,12 +163,20 @@ window.addEventListener("load", function() {
   }
 
   function scoreUp(){
+    let animate = document.querySelector('#plus');
+    animate.className = "animation";
+    let animate1 = document.querySelector('#shapes-game');
+    animate1.className = "glowGreen";
     var score = scoreSpan.innerText;
     score++;
     scoreSpan.innerText = score;
   }
 
   function scoreDown(){
+    let animate2 = document.querySelector('#minus');
+    animate2.className = "animationDown";
+    let animate3 = document.querySelector('#shapes-game');
+    animate3.className = "glowRed";
     var score = scoreSpan.innerText;
     score--;
     scoreSpan.innerText = score;
@@ -160,6 +185,15 @@ window.addEventListener("load", function() {
 
 
   document.onkeydown = function(e){
+      //reset animations
+      let animate2 = document.querySelector('#minus');
+      animate2.className = '';
+      let animate3 = document.querySelector('#shapes-game');
+      animate3.className = '';
+      let animate = document.querySelector('#plus');
+      animate.className = '';
+      let animate1 = document.querySelector('#shapes-game');
+      animate1.className = '';
       if(e.keyCode === 38 && gameOn){
         //up
         if(expectedKey === 4){
