@@ -47,19 +47,19 @@ h1{
 }
 #minus{
   color: white;
-  position: absolute;
-  left: 25px;
+	position: absolute;
+	left: 25px;
 }
 .animationDown{
-  animation: floatdown 1s 1;
+	animation: floatdown 1s 1;
 }
 @keyframes floatdown{
-  50%{
-    color: red;
-  }
-  100%{
-    transform: translate(0, 10px);
-  }
+	50%{
+		color: red;
+	}
+	100%{
+		transform: translate(0, 10px);
+	}
 }
 
 .animation{
@@ -67,12 +67,12 @@ h1{
 }
 
 @keyframes floatup{
-  50%{
-    color: lightgreen;
-  }
-  100%{
-    transform: translate(0, -10px);
-  }
+	50%{
+		color: lightgreen;
+	}
+	100%{
+		transform: translate(0, -10px);
+	}
 }
 
 .canvas-container {
