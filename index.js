@@ -7,9 +7,6 @@ window.addEventListener("load", function() {
     hScore = document.querySelector('#high-score');
     hScore.innerText = highScore[0];
   }
-
-
-
   var canvas = document.getElementById("shapes-game"),
       height = canvas.scrollHeight,
       width = canvas.scrollWidth,
@@ -128,7 +125,7 @@ window.addEventListener("load", function() {
     clear(ctx, canvas.width, canvas.height);
     //increase high score if higher.
     if(score > highScore[0]){
-      let high = document.querySelector('#high-score');
+      var high = document.querySelector('#high-score');
       high.innerText = score;
       highScore[0] = score;
       localStorage.setItem("topscore", JSON.stringify(highScore));
@@ -163,20 +160,28 @@ window.addEventListener("load", function() {
   }
 
   function scoreUp(){
-    let animate = document.querySelector('#plus');
+    var animate = document.querySelector('#plus');
     animate.className = "animation";
-    let animate1 = document.querySelector('#shapes-game');
+    var animate1 = document.querySelector('#shapes-game');
     animate1.className = "glowGreen";
+    setTimeout(function(){
+      animate.className = '';
+      animate1.className = '';
+    }, 1000);
     var score = scoreSpan.innerText;
     score++;
     scoreSpan.innerText = score;
   }
 
   function scoreDown(){
-    let animate2 = document.querySelector('#minus');
+    var animate2 = document.querySelector('#minus');
     animate2.className = "animationDown";
-    let animate3 = document.querySelector('#shapes-game');
+    var animate3 = document.querySelector('#shapes-game');
     animate3.className = "glowRed";
+    setTimeout(function(){
+      animate2.className = '';
+      animate3.className = '';
+    }, 1000);
     var score = scoreSpan.innerText;
     score--;
     scoreSpan.innerText = score;
@@ -186,14 +191,6 @@ window.addEventListener("load", function() {
 
   document.onkeydown = function(e){
       //reset animations
-      let animate2 = document.querySelector('#minus');
-      animate2.className = '';
-      let animate3 = document.querySelector('#shapes-game');
-      animate3.className = '';
-      let animate = document.querySelector('#plus');
-      animate.className = '';
-      let animate1 = document.querySelector('#shapes-game');
-      animate1.className = '';
       if(e.keyCode === 38 && gameOn){
         //up
         if(expectedKey === 4){
