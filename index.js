@@ -153,7 +153,7 @@ window.addEventListener("load", function() {
       clearInterval(intervalId);
       clearInterval(dropId);
       expectedKey = undefined;
-    }, 6000);
+    }, 30000);
     gameOn = true;
   }
 
