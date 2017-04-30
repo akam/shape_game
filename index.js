@@ -1,15 +1,13 @@
 window.addEventListener("load", function() {
   //add storage
-  if(JSON.parse(localStorage.getItem("topscore")) === null){
-    var storage = [];
-    var newObj = {};
-    newObj.highScore = 0;
-    storage.push(newObj);
-    localStorage.setItem("topscore", JSON.stringify(storage));
+  storage = JSON.parse(localStorage.getItem("topscore"));
+  if(storage === null){
+    storage = [];
+    var obj = {["highScore"]: 0};
+    storage.push(obj);
   } else {
-    var storage = JSON.parse(localStorage.getItem("topscore"));
-    hScore = document.querySelector('#high-score');
-    hScore.innerText = storage[0].highScore;
+    var top = document.getElementById("high-score");
+    top.innerText = storage[0].highScore;
   }
   var canvas = document.getElementById("shapes-game"),
       height = canvas.scrollHeight,
@@ -147,13 +145,13 @@ window.addEventListener("load", function() {
     scoreSpan.innerText = 0;
     timerSpan.innerText = 30;
     clear(ctx, canvas.width, canvas.height);
-    intervalId = setInterval(countDown, 1000);
+    intervalId = setInterval(countDown, 100);
     setTimeout(function(){
       drawGameStartText(ctx, canvas.width,canvas.height,scoreSpan.innerText);
       clearInterval(intervalId);
       clearInterval(dropId);
       expectedKey = undefined;
-    }, 30000);
+    }, 3000);
     gameOn = true;
   }
 
