@@ -145,13 +145,13 @@ window.addEventListener("load", function() {
     scoreSpan.innerText = 0;
     timerSpan.innerText = 30;
     clear(ctx, canvas.width, canvas.height);
-    intervalId = setInterval(countDown, 100);
+    intervalId = setInterval(countDown, 1000);
     setTimeout(function(){
       drawGameStartText(ctx, canvas.width,canvas.height,scoreSpan.innerText);
       clearInterval(intervalId);
       clearInterval(dropId);
       expectedKey = undefined;
-    }, 3000);
+    }, 30000);
     gameOn = true;
   }
 
