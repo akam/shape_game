@@ -1,11 +1,15 @@
 window.addEventListener("load", function() {
   //add storage
   if(JSON.parse(localStorage.getItem("topscore")) === null){
-    var highScore = [0];
+    var storage = [];
+    var newObj = {};
+    newObj.highScore = 0;
+    storage.push(newObj);
+    localStorage.setItem("topscore", JSON.stringify(storage));
   } else {
-    var highScore = JSON.parse(localStorage.getItem("topscore"));
+    var storage = JSON.parse(localStorage.getItem("topscore"));
     hScore = document.querySelector('#high-score');
-    hScore.innerText = highScore[0];
+    hScore.innerText = storage[0].highScore;
   }
   var canvas = document.getElementById("shapes-game"),
       height = canvas.scrollHeight,
@@ -124,11 +128,11 @@ window.addEventListener("load", function() {
   function drawGameStartText(ctx, width, height, score) {
     clear(ctx, canvas.width, canvas.height);
     //increase high score if higher.
-    if(score > highScore[0]){
+    if(score > storage[0].highScore){
       var high = document.querySelector('#high-score');
       high.innerText = score;
-      highScore[0] = score;
-      localStorage.setItem("topscore", JSON.stringify(highScore));
+      storage[0].highScore = score;
+      localStorage.setItem("topscore", JSON.stringify(storage));
     }
     ctx.font = "20px Arial";
     ctx.fillStyle = "white";
@@ -149,7 +153,7 @@ window.addEventListener("load", function() {
       clearInterval(intervalId);
       clearInterval(dropId);
       expectedKey = undefined;
-    }, 30000);
+    }, 6000);
     gameOn = true;
   }
 
